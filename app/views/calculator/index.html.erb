@@ -1,0 +1,13 @@
+<h1>Calculator form</h1>
+
+<div class="input">
+	<%= form_tag("/calc/calculate", method: "post") do %>
+		<input placeholder="value1" name="value1">
+		<input placeholder="value2" name="value2">
+		<input placeholder="operation" name="operation">
+		<button>Submit</button>
+	<% end %>
+</div>
+
+<br>
+

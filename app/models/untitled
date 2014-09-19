@@ -1,0 +1,27 @@
+	def operations
+		RULES[user_name][:operations]
+	end
+
+	def value
+		RULES[user_name][:value][:leq]
+	end
+
+	def admin?
+		RULES[user_name] == :allow_all
+	end
+
+	def exist?
+		RULES[user_name]
+	end
+
+	def able?(val1, val2, operation)
+		correct_value?(val1, val2) && correct_opperation?(operation)
+	end
+
+	def correct_value?(val1, val2)
+		val1.to_f <  value && val2.to_f < value
+	end
+
+	def correct_opperation?(operation)
+		operations.include? operation
+	end
