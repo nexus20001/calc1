@@ -1,17 +1,53 @@
 
 <h1>Calculator form</h1>
-
+<style>
+  input
+  {
+      width: 43px;
+  }
+  ul
+  {
+      padding-left: 0px;
+  }
+  .calculator
+  {
+      margin-top: 10px;
+  }
+</style>
 <div class="input">
-  <%= form_tag("/calc/calculate", :method => "post", :class => "form-inline") do %>
+  <%= form_tag("/calc/calculate", :method => "post", :class => "form-inline" ,:name => "signin") do %>
+      <div id="value1">
       <div class="form-group">
-        <input type="text" class="form-control" name="value1" id="exampleInputEmail2" placeholder="value1">
+        <input type="text" class="form-control" name="expression" id="exampleInputEmail2" placeholder="Enter expression">
       </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="value2" id="exampleInputEmail2" placeholder="value2">
+      <div class="calculator">
+      <ul class="rowone">
+        <input type="button" name="seven"class="seven" value="7">
+        <input type="button" name="eight"class="eight" value="8">
+        <input type="button" name="nine"  class="nine"value="9">
+        <input type="button" name="plus"  class="nine"value="+">
+      </ul>
+      <ul class="rowtwo">
+        <input type="button" name="four"  class="four"value="4">
+        <input type="button" name="five"  class="five"value="5">
+        <input type="button" name="six"  class="six"value="6">
+        <input type="button" name="minus"  class="six"value="-">
+      </ul>
+      <ul class="rowthree">
+        <input type="button" name="one"  class="one" value="1">
+        <input type="button" name="two"  class="two" value="2">
+        <input type="button" name="three" class="three" value="3">
+        <input type="button" name="multiply"  class="six"value="*">
+      </ul>
+      <ul class="rowfour">
+        <input type="button" name="zero" class="zero" value="0">
+        <input type="button" name="zero" class="zero" value="c" onclick="signin.expression.value = signin.expression.value.slice(0, - 1)">
+        <input type="button" name="zero" class="zero" value="ce" onclick="signin.expression.value = null">
+        <input type="button" name="divide" class="zero" value="/">
+      </ul>
+        </div>
       </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="operation" id="exampleInputEmail2" placeholder="operation">
-      </div>
+
       <button type="submit" class="btn btn-default">Submit</button>
       </form>
   <% end %>
@@ -19,3 +55,16 @@
 
 <br>
 
+<script>
+    var operations = ["*","/","+","-"];
+    $( document ).ready(function() {
+        $("#value1 input[type=button]").on('click', function(event) {
+            if(isFinite(this.value) || operations.indexOf(this.value) != -1)
+            set_value1(this.value.replace(/\s+/g, ''))
+        });
+    });
+  function set_value1(value)
+  {
+      signin.expression.value += value;
+  }
+</script>
