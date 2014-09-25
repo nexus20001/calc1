@@ -2,14 +2,18 @@ class CalculatorController < ApplicationController
   def index
 
   end
+
   def calculate
-    @user = current_user
     @result = check_perms
+    # render text: @result
   end
+
   private
+
   def check_perms
-    return _run if @user.admin? and @user.able_admin?(params[:expression])
-    _run if @user.able?(params[:expression]) and @user.correct_value?(params[:expression])
+    return _run if current_user.admin? and current_user.able_admin?(params[:expression])
+    return _run if current_user.able?(params[:expression]) and current_user.correct_value?(params[:expression])
+    "error"
   end
 
   def _run

@@ -36,4 +36,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.generators do |g|
+    g.test_framework :rspec, :fixture => true
+    g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+    g.template_engine :haml
+  end
 end
